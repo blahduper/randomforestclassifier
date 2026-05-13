@@ -26,21 +26,31 @@ To prevent the model from buying into massive crashes simply because technical i
 ### 4. Stress-Test Training Methodology
 To ensure the model understood what a true market collapse looked like, it was specifically trained on data from **2005 to 2015**. This forced the Random Forest to process the extreme volatility of the 2008 Great Financial Crisis, giving it the mathematical context required to extrapolate danger during future unseen black swan events.
 
+### 5. Hyperparameter Optimization
+Instead of relying on the default Random Forest 50% democratic voting threshold, the pipeline includes a programmatic optimization script to find the threshold that maximizes the **Sharpe Ratio** (Risk-Adjusted Return), balancing the tradeoff between market participation and capital preservation.
+
 ## Out-of-Sample Backtesting (The 2020 COVID Crash)
-The model was subjected to a rigorous, vectorized Out-of-Sample (OOS) backtest from late-2018 to 2021. This specific timeframe tested the model's ability to ride a massive bull run (2019) and subsequently survive the 2020 global pandemic shutdown.
+The optimized model was subjected to a rigorous, vectorized Out-of-Sample (OOS) backtest from late-2017 to late-2020. This specific timeframe tested the model's ability to ride a massive bull run (2019) and subsequently survive the 2020 global pandemic shutdown.
 
 *Note: Transaction costs of `0.1%` per trade were included to simulate realistic slippage and bid-ask spread.*
 
-### Key Results:
+### Key Results (Optimal Threshold: 0.39):
+* **OOS Buy & Hold Baseline Return:** 221.23%
+* **OOS Strategy Return:** 260.12%
+* **OOS Sharpe Ratio:** 1.45
+* **Time in Market:** 727 Days
+* **Time in Cash (Protective):** 42 Days
+
+### Performance Takeaways:
 * **Asymmetric Capture:** The model successfully utilized the 200-Day SMA to ride the 2019 bull market, capturing the upside while avoiding over-trading.
-* **Capital Preservation:** Triggered by the spiking VIX and broken technicals, the model successfully shifted to 100% cash during the height of the COVID-19 crash in early 2020 (flat green line), preserving capital while the baseline plummeted.
-* **Outperformance:** By avoiding the drawdown, the strategy achieved a significantly higher final portfolio multiplier than the baseline with a much lower volatility profile (resulting in an elite Sharpe Ratio).
+* **Capital Preservation:** Triggered by the spiking VIX and broken technicals, the model successfully shifted to 100% cash during the height of the COVID-19 crash in early 2020, preserving capital while the baseline plummeted.
+* **Outperformance:** By sitting out for just 42 highly volatile, dangerous trading days, the strategy achieved a significantly higher final portfolio multiplier than the baseline with a much lower volatility profile (resulting in an elite Sharpe Ratio of 1.45).
 
 ![Out of Sample Backtest](oos_backtest.png)
 
 ## Technologies Used
 * `Python` (Object-Oriented Pipeline)
 * `pandas` / `numpy` (Vectorized backtesting and timezone-aware data alignment)
-* `scikit-learn` (RandomForestClassifier, Class Weight Balancing)
+* `scikit-learn` (RandomForestClassifier, Class Weight Balancing, Precision Evaluation)
 * `yfinance` (Data ingestion)
 * `matplotlib` (Visualization)
