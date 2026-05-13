@@ -1,0 +1,11 @@
+gsize=(14, 7))
+# plt.plot(df.index, df['Close'], label='Actual Price', alpha=0.5)
+# plt.plot(df.index, df['SMA_20'], label='20-Day SMA (Fast)')
+# plt.plot(df.index, df['SMA_50'], label='50-Day SMA (Slow)')
+
+# plt.title(f'{ticker} Stock Price & Moving Averages')
+# plt.xlabel('Date')
+# plt.ylabel('Price (USD)')
+# plt.legend()
+# plt.grid(True, alpha=0.3)
+# plt.show()
